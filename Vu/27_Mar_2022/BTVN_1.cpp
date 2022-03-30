@@ -1,7 +1,9 @@
+//Finding 1: The template should be followed
 #include <iostream>
 
 using namespace std;
 
+//The code executes OK, but should be implemented functionally.
 int main()
 {
     int a[10]={2,3,1,6,5,9,8,2,11,3};
