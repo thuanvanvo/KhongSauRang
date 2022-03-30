@@ -3,10 +3,12 @@
 Viết chương trình xuất ra kí tự xuất hiện nhiều nhất trong chuỗi? Nếu có nhiều kí tự xuất hiện nhiều như nhau, xuất kết quả 
 “Khong co ki tu nao xuat hien nhieu nhat”
 ***************************************************************/
-
+//Finding 1: The length of each line should be less than 80.
 #include <iostream>
 using namespace std;
 int CountMaxSwap(string a){
+	//Finding 2: The parameter is named incorrectly
+	//Ex: int count, int countMax,...
     int Count=0;
     int CountMax=0;
     for(int i=0;i<a.size();i++){
@@ -32,6 +34,8 @@ int main()
     int CountSwap=0;
     int CheckCountSwap=0;
     string CharMax;
+	//The coding executes OK, but not effectively
+	//because too many loops were called.
    for(int i=0;i<a.size();i++){
        if(a[i]>='a'&&a[i]<='z'){
             for(int j=0;j<a.size();j++){
