@@ -4,6 +4,7 @@ using namespace std;
 void MaxOfSecond(int a[]){
     int max=a[0];
     int maxSecond=0;
+	//Finding 1: The array does not always include 5 elements.
     for(int i=1;i<5;i++){
         if(a[i]>max) max=a[i];
         int j=i-1;

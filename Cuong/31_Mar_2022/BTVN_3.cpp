@@ -13,6 +13,8 @@ số tiền phải thanh toán.
 #include <string>
 #include <stdio.h>
 using namespace std;
+
+//Finding 1: 'QuanLyCacDauSach' is correct? It should be 'Sach'
 class QuanLyCacDauSach{
     private:
     string tieuDe;
@@ -20,6 +22,7 @@ class QuanLyCacDauSach{
     string tacGia;
     unsigned long int giaTien;
     int soLuongTrongKho;
+	//Finding 2: 'soLuongMua' seems not an attribute in class Sach.
     int soLuongMua;
     public:
     void Nhap(){

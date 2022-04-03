@@ -4,6 +4,8 @@
 using namespace std;
 int Sum(int n[]){
     int sum=0;
+	//Finding 1: The array does not always include 10 elements.
+	//How to solve it if there is 20, 22, 25,... elements in an array?
     for(int i=0;i<10;i++){
         sum+=n[i];  
     }
