@@ -1,11 +1,14 @@
 // BTVN_3.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+//Finding 1: Please follow the template as Template.cpp
 #include <iostream>
 #include <string>
 using namespace std;
+//Finding 2: 'HieuSach' is correct? It should be 'Sach'
 class HieuSach {
 private:
+//Finding 3: The parameters are named incorrectly as rule.
+//Ex: string tieuDe,...
     string tieude;
     string theloai;
     string tacgia;
@@ -34,6 +37,9 @@ public:
         if (soluongtrongkho > 0 && soluongtrongkho > soluongmua) {
             hethang = false;
         }
+		//Finding 4: The return value is not as expectation.
+		//Note: The bool function should return 'true' or 'false'.
+		//      It does not print anything in the console.
         if (hethang == true) cout <<"het hang";
         else cout << "con hang";
         return 0;

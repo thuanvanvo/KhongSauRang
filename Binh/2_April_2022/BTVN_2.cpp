@@ -1,10 +1,11 @@
 // BTVN_2.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+//Finding 1: Please follow the template as Template.cpp
 #include <iostream>
 using namespace std;
 int SumOfArray (int a[], int n) {
     int sum = 0;
+	//Finding 2: The input process should not be in this function.
     for (int i = 0; i <n; i++) {
         cin >> a[i];
     }

@@ -1,9 +1,12 @@
 // BTVN_1.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+//Finding 1: Please follow the template as Template.cpp
 
 #include <iostream>
 using namespace std;
 int GiaiThua(int n) {
+	//Finding 2: The parameters are named incorrectly
+	//Ex: int giaiThua,...
 	int giaithua = 1;
 	for (int i = 1; i <= n; i++) {
 		giaithua = giaithua * i;

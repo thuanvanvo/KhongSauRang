@@ -1,6 +1,6 @@
 // BTVN_4.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+//Finding 1: Please follow the template as Template.cpp
 #include <iostream>
 using namespace std;
 
@@ -8,6 +8,7 @@ int main()
 {   
     int a[100];
     int n;
+	//Finding 2: The initial value of 'max' and 'max1' seems incorrect.
     int max = 0;
     int max1 = 0;
     cout << " nhap so phan tu mang: " << endl;
@@ -20,6 +21,8 @@ int main()
         if (a[i] > max) {
             max = a[i];
         }
+		//Finding 3: Why does 'j' start at i-1?
+		//Maybe there are too many loops executed.
         for (int j = i - 1; j < n; j++) {
             if (a[j] < max && a[j] > max1) {
                 max1 = a[j];
