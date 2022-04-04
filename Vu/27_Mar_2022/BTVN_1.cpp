@@ -1,38 +1,40 @@
+//Bai 1 xã dinh vi tri của thanh vien trong nhom
 //Finding 1: The template should be followed
 #include <iostream>
 
 using namespace std;
 
-//The code executes OK, but should be implemented functionally.
-int main()
-{
-    int a[10]={2,3,1,6,5,9,8,2,11,3};
-    int n, count=0;
-    int i,j;
-    int sumOfAllMember=0, sumOfMember=0;
-   
-    for (i=0; i<10; i++){
-        sumOfAllMember+=a[i];
+int TieuDoi(int a[], int n){
+    int sum = 0; 
+    int sumOfMember = 0;
+    for (int i=0; i<10; i++){
+        sum += a[i];
     }
-    
-    cout << "Nhap so thu tu thanh vien trong dai doi: ";
-    for (i=0; i<i+1; i++){
-        cin >>n;
-        if (n <= 0 || n > sumOfAllMember){
-            cout <<"So thu tu thanh vien khong hop le, nhap lai: ";
-        }
+        if (n <= 0 || n > sum)
+            return -1;
         else {
-            for (int j=0; j<10; j++){
-                sumOfMember+=a[j];
-                if (sumOfMember >=n){
-                    count = j+1;
-                    break;
-                }
+            for (int i=0; i<10; i++){
+                sumOfMember+=a[i];
+                if (sumOfMember >=n)
+                    return i+1;
             }
-        cout <<"Thanh vien thu "<<n<<" thuoc Tieu doi "<<count;  
         }
-      
-    }
-           
+}
+
+//The code executes OK, but should be implemented functionally.
+//3-Apr-2022: Fixed.
+
+int main(){
+    int a[10]={2,3,1,6,5,9,8,2,11,3};
+    int n;
+   
+    cout << "Nhap so thu tu thanh vien trong dai doi: ";
+    cin >>n;
+    if (TieuDoi(a, n) == -1) 
+        cout<<"Thanh vien khong thuoc tieu doi nao ";
+    else 
+        cout <<"Thanh vien thuoc Tieu doi "<<TieuDoi(a, n);  
+        
     return 0;
 }
+
