@@ -1,58 +1,41 @@
 /***************************************************************
 *Bai 2: hập một chuỗi kí tự từ bàn phím.
-Viết chương trình xuất ra kí tự xuất hiện nhiều nhất trong chuỗi? Nếu có nhiều kí tự xuất hiện nhiều như nhau, xuất kết quả 
+Viết chương trình xuất ra kí tự xuất hiện nhiều nhất trong chuỗi? Nếu có nhiều 
+kí tự xuất hiện nhiều như nhau, xuất kết quả 
 “Khong co ki tu nao xuat hien nhieu nhat”
 ***************************************************************/
 //Finding 1: The length of each line should be less than 80.
+//31-Mar-2022: Fixed
 #include <iostream>
 using namespace std;
-int CountMaxSwap(string a){
+void RepeatTheMost(string a){
 	//Finding 2: The parameter is named incorrectly
 	//Ex: int count, int countMax,...
-    int Count=0;
-    int CountMax=0;
-    for(int i=0;i<a.size();i++){
-       if(a[i]>='a'&&a[i]<='z'){
-            for(int j=0;j<a.size();j++){
-                if(a[i]==a[j]){
-                    Count++;
-                }
-            }
-            if(Count>CountMax){
-                   CountMax=Count;
-                   Count=0;
-            }
-            else Count=0;
-       }
-   }
-   return CountMax;
+	//fixed
+    int count[26];
+    for(int i=0;i<26;i++){
+        count[i]=0;    
+}
+    for(int i=0; i<a.size();i++){
+        count[int(a[i])-97]++;
+    }
+    int countMax=count[0];
+    int maxPosition=0;
+    for(int i=0;i<26;i++){
+        if(countMax<count[i]){
+            countMax=count[i];
+            maxPosition=i;
+        }
+    }    
+    cout<<"ky tu xuat hien nhieu nhat la "<< char(maxPosition+97) 
+	<<", voi so lan lap lai la "<<countMax;
 }
 int main()
 {
-    string a;
-    getline(cin,a);
-    int CountSwap=0;
-    int CheckCountSwap=0;
-    string CharMax;
+    string a = "adkjsadkjncnufnnncnncnnnnnnndjoadn";
+    RepeatTheMost(a);
 	//The coding executes OK, but not effectively
 	//because too many loops were called.
-   for(int i=0;i<a.size();i++){
-       if(a[i]>='a'&&a[i]<='z'){
-            for(int j=0;j<a.size();j++){
-                if(a[i]==a[j]){
-                    CountSwap++;
-                }
-            }
-   if(CountSwap==CountMaxSwap(a)){
-        CheckCountSwap++;
-        CharMax=a[i];
-    }
-            CountSwap=0;
-       }
-   }
-   if(CheckCountSwap==CountMaxSwap(a)){
-       cout<<"Ky tu "<<CharMax<<" xuat hien nhieu nhat, voi "<<CountMaxSwap(a)<<" lan!";
-   }
-   else cout<<"Khong co ki tu nao xuat hien nhieu nhat";
+	//fixed
     return 0;
 }

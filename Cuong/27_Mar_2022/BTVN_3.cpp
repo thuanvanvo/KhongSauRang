@@ -1,24 +1,17 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <iostream>
 
 using namespace std;
-void AreaOfSquare(int Side, int* Area){ // Cap dia chi bien x, bien y
-   cout << "Area: ";
-   cin>>Side;
-   *Area=Side*Side;
+void DienTichHinhVuong(int side, int* area){ // Cap dia chi bien x, bien y
+//fixed
+	if(side<=0) *area=-1;
+	else *area=side*side;
 }
 int main()
 {
-    int Side;
-    int Area;
-    AreaOfSquare(Side,&Area);
-    cout<<"Area = "<<Area;
+    int side=9;
+    int area=0;
+    DienTichHinhVuong(side,&area);
+    if(area==-1) cout<<"Bien khong hop le";
+    else cout<<"Area = "<<area;
     return 0;
 }
