@@ -9,6 +9,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
 #include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
 using namespace std;
 class PhongTro{
   private:
@@ -18,6 +19,8 @@ class PhongTro{
   unsigned int soDienCu;
   unsigned int soNuocMoi;
   unsigned int soDienMoi;
+  time_t now = time(0);
+  tm *ltm = localtime(&now);
   public:
     void DangKyPhong(){
         cout<<"Nhap so phong: ";
@@ -49,7 +52,7 @@ class PhongTro{
         return giaPhong + TinhTienNuoc() + TinhTienDien();
     }
     void HoaDon(){
-        cout<<"Hoa don tien nha thang: \n";
+        cout<<"Hoa don tien nha thang: "<< 1 + ltm->tm_mon<< endl;
         cout<<"So phong: "<<soPhong<<"\n";
         cout<<"Tien thue nha: "<<giaPhong<<" VND\n";
         cout<<"Tien dien: "<<TinhTienDien()<<" VND\n";
@@ -132,7 +135,7 @@ class PhongTro{
                 case 5: HienThiTienNuoc(); break;
                 case 6: HoaDonTienNha(); break;//khi tinh hoa don thi ket thuc luon chuong tirnh
             }
-            } while(chon < 6);
+            } while(chon < 7);
         }
 };
 int main()
