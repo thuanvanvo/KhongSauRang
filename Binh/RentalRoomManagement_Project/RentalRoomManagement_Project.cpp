@@ -1,13 +1,13 @@
-// ConsoleApplication8.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
+
+
 using namespace std;
 class PhongTro {
 private:
-	int soPhong;
+	int phongSo;
 	int giaTien;
 	unsigned int soNuocmoi;
 	unsigned int soDienmoi;
@@ -15,14 +15,14 @@ private:
 	unsigned int soNuoccu;
 public:
 	void DangKyPhong() {
-		
+
 		cout << "so phong ";
-		cin >> soPhong;
+		cin >> phongSo;
 		cout << "gia tien mot thang: ";
 		cin >> giaTien;
 		cout << "so dien thang truoc ";
 		cin >> soDiencu;
-		
+
 		cout << "so nuoc thang truoc ";
 		cin >> soNuoccu;
 		soDienmoi = soDiencu;
@@ -37,13 +37,18 @@ public:
 		cin >> soNuocmoi;
 	}
 	unsigned long int TinhTienDien() {
+		
 		return (soDienmoi - soDiencu) * 3500;
 	}
 	unsigned long int TinhTienNuoc() {
 		return (soNuocmoi - soNuoccu) * 15000;
 	}
 	unsigned long int TinhTongTienPhong() {
-		return giaTien + TinhTienNuoc() + TinhTienDien(); 
+		return giaTien + TinhTienNuoc() + TinhTienDien();
+	}
+	void ThongTinPhong() {
+		cout << "So phong:" << phongSo << "\n";
+		cout << "tien phong: " << giaTien <<"\n";
 	}
 };
 class SoQuanLy {
@@ -53,7 +58,7 @@ private:
 public:
 	void KhoiTaoSo() {
 		int n;
-		
+
 		cout << " nhap tong so phong: ";
 		cin >> n;
 		room.resize(n);
@@ -68,7 +73,7 @@ public:
 	void ThemPhong() {
 		PhongTro a;
 		a.DangKyPhong();
-		room. push_back(a);
+		room.push_back(a);
 
 	}
 	void HienThiTienDien() {
@@ -79,6 +84,14 @@ public:
 		else cout << "tien dien phong thu " << chon << "la : " << room[chon - 1].TinhTienDien();
 		system("pause");
 	}
+	void HienThiTienNuoc() {
+		cout << "Nhap so thu tu cua phong: ";
+		int chon;
+		cin >> chon;
+		if (chon <= 0 || chon > room.size()) cout << "so thu tu phong khong hop le";
+		else cout << "tien nuoc phong thu " << chon << "la : " << room[chon - 1].TinhTienNuoc();
+		system("pause");
+	}
 	void HienThiCapNhatDienNuoc() {
 		cout << "Nhap so thu tu cua phong: ";
 		int chon;
@@ -86,7 +99,24 @@ public:
 		if (chon <= 0 || chon > room.size()) cout << "so thu tu phong khong hop le";
 		else cout << "dien va nuoc moi phong thu " << chon; "/n";
 		room[chon - 1].UpdateNuocVaDien();
-		
+
+	}
+	void HienThiHoaDonTienNha() {
+		cout << "Nhap so thu tu cua phong: ";
+		int chon;
+		cin >> chon;
+		time_t now = time(0);
+		tm* ltm = localtime(&now);
+		if (chon <= 0 || chon > room.size()) cout << "so thu tu phong khong hop le";
+		else { 
+			cout << "hoa don tien nha thang " << 1 + ltm->tm_mon << "\n";
+			cout << "thong tin phong" << "\n";
+			room[chon - 1].ThongTinPhong();
+			cout << "tien dien " << room[chon - 1].TinhTienDien() << "\n";
+			cout << "tien nuoc " << room[chon - 1].TinhTienNuoc() << "\n";
+			cout << "hoa don tien phong " << chon << "la : " << room[chon - 1].TinhTongTienPhong();
+			system("pause");
+		}
 	}
 	void GiaoDien() {
 		int chon;
@@ -97,7 +127,9 @@ public:
 			cout << "2. them thong tin phong tro \n";
 			cout << "3. cap nhat dien va nuoc \n";
 			cout << "4. tien dien phong\n";
-			cout << "5. thoat\n";
+			cout << "5. tien nuoc phong\n";
+			cout << "6. hoa don tien phong\n";
+			cout << "7. thoat\n";
 			cout << "vui long nhap lua chon";
 			cin >> chon;
 			switch (chon) {
@@ -105,8 +137,10 @@ public:
 			case 2: ThemPhong(); break;
 			case 3: HienThiCapNhatDienNuoc(); break;
 			case 4: HienThiTienDien(); break;
+			case 5: HienThiTienNuoc(); break;
+			case 6: HienThiHoaDonTienNha(); break;
 			}
-		} while (chon != 5);
+		} while (chon != 7);
 	}
 };
 int main() {
@@ -114,15 +148,3 @@ int main() {
 	x.GiaoDien();
 	return 0;
 }
-	
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
