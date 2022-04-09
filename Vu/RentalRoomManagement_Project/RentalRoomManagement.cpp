@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
 using namespace std;
 class PhongTro{
     private: 
@@ -48,10 +49,17 @@ class PhongTro{
            return (soNuocMoi - soNuocCu)*15000;
        }
        
-       unsigned int TinhTienPhong(){
-           cout <<"Nhap gia phong: ";
-           cin >>giaPhong;
-           return (TinhTienNuoc() + TinhTienDien() + giaPhong);
+       void TinhTienPhong(){
+            time_t now = time(0);
+            tm *ltm = localtime(&now);
+            cout <<"Nhap gia phong: ";
+            cin >>giaPhong;
+            cout<<"Tong tien thue Phong "<<soPhong<<" thang "<<1 + ltm->tm_mon
+            <<" la: "<<(TinhTienNuoc()+TinhTienDien()+giaPhong)<<"\n"
+            <<"Trong do: \n"
+            <<"Tien Phong la:"<<giaPhong<<"\n"
+            <<"Tien Dien la: "<<TinhTienDien()<<"\n"
+            <<"Tien Nuoc la: "<<TinhTienNuoc()<<"\n";
        }
 }; 
 
@@ -81,24 +89,6 @@ class SoQuanLy{
             room.push_back(a);
         } 
          
-            
-        void XuatHoaDonTienDienNuoc(){
-            int chon;
-            cout<<"Nhap so thu tu Phong: ";
-            cin>> chon;
-            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
-            else {
-                cout<<"tien dien Phong "<<chon<<" la:"
-                    <<room[chon-1].TinhTienDien()<<"\n";
-                cout<<"tien nuoc Phong "<<chon<<" la:"
-                    <<room[chon-1].TinhTienNuoc()<<"\n";
-                cout<<"Tong tien Dien Nuoc la:"
-                <<room[chon-1].TinhTienDien()+room[chon-1].TinhTienNuoc()<<"\n";
-                
-            }   
-        }
-         
-            
         void HienThiCapNhatDienNuoc(){
             int chon;
             cout<<"Nhap so thu tu Phong: ";
@@ -106,27 +96,65 @@ class SoQuanLy{
             if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
             else room[chon-1].CapNhatSoDienNuoc();
             cout<<"Cap nhat dien nuoc thanh cong! \n";
-        }    
+        }   
+        
+        void XuatHoaDonTienDien(){
+            int chon;
+            cout<<"Nhap so thu tu Phong: ";
+            cin>> chon;
+            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
+            else {
+                cout<<"tien dien Phong "<<chon<<" la:"
+                    <<room[chon-1].TinhTienDien()<<"\n";
+            }   
+        }
+         
+    
+        void XuatHoaDonTienNuoc(){
+            int chon;
+            cout<<"Nhap so thu tu Phong: ";
+            cin>> chon;
+            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
+            else {
+                cout<<"tien nuoc Phong "<<chon<<" la:"
+                    <<room[chon-1].TinhTienNuoc()<<"\n";
             
+            }   
+        }
+        
+         void XuatHoaDonTienNha(){
+            int chon;
+            cout<<"Nhap so thu tu Phong: ";
+            cin>> chon;
+            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
+            else {
+                room[chon-1].TinhTienPhong();
+            }   
+        }
+        
         void GiaoDien(){
             int chon;
             do{
             system("cls");
             cout<<"CHUONG TRINH QUAN LY PHONG TRO\n";
             cout<<"1. Khoi tao du lieu quan ly\n";
-            cout<<"2. Them phong tro\n";
-            cout<<"3. Cap nhat so dien nuoc\n";
-            cout<<"4. Tinh tien Dien Nuoc\n";
-            cout<<"5. Thoat\n";
+            cout<<"2. Them Phong tro\n";
+            cout<<"3. Cap nhat so Dien, Nuoc\n";
+            cout<<"4. Tinh tien Dien\n";
+            cout<<"5. Tinh tien Nuoc\n";
+            cout<<"6. Tong tien thue Phong\n";
+            cout<<"7. Thoat\n";
             cout<<"Vui long nhap lua chon: ";
             cin>>chon;
             switch(chon){
                 case 1: KhoiTaoSo(); break;
                 case 2: ThemPhong(); break;
                 case 3: HienThiCapNhatDienNuoc(); break;
-                case 4: XuatHoaDonTienDienNuoc(); break;
+                case 4: XuatHoaDonTienDien(); break;
+                case 5: XuatHoaDonTienNuoc(); break;
+                case 6: XuatHoaDonTienNha(); break;
             }
-            } while(chon != 5);
+            } while(chon != 7);
         }
     
     
