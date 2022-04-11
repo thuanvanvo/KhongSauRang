@@ -57,7 +57,7 @@ class PhongTro{
         
 
        void DangKyPhong(){
-           cout<<"Dang ky phong o: \n";
+           cout<<"Chon phong: \n";
             cin>>soPhong;
            
            
@@ -72,28 +72,9 @@ class PhongTro{
            cout<<"Nhap so nuoc cu: ";
            cin>>soNuocCu;
            soNuocMoi = soNuocCu;
-           
        }
        
-   
-       unsigned int TinhTienDien(){
-            return (soDienMoi - soDienCu)*3500;
-            
-       }
-       unsigned int TinhTienNuoc(){
-           return (soNuocMoi - soNuocCu)*15000;
-       }
        
-       void TinhTienPhong(){
-            time_t now = time(0);
-            tm *ltm = localtime(&now);
-            cout<<"Tong tien thue Phong "<<soPhong<<" thang "<<1 + ltm->tm_mon
-            <<" la: "<<(TinhTienNuoc()+TinhTienDien()+giaPhong)<<"\n"
-            <<"Trong do: \n"
-            <<"Tien Phong la:"<<giaPhong<<"\n"
-            <<"Tien Dien la: "<<TinhTienDien()<<"\n"
-            <<"Tien Nuoc la: "<<TinhTienNuoc()<<"\n";
-       }
 }; 
 
 class SoQuanLy{
@@ -101,14 +82,14 @@ class SoQuanLy{
         int soPhong;
         vector <PhongTro> room;
     public:
-        void KhoiTaoSo(){//Nhap so luong phong va thong tin ca phong
-            int n;
-            cout<<"Nhap tong so phong: ";
-            cin>>n;
-            soPhong = n;
-            room.resize(n);
-            for (int i = 0; i < n; i ++){
-                cout<<"Nhap thong tin phong thu "<<i+1<<": \n";
+        void KhoiTaoSo(){//Nhap so luong phong va thong tin cac phong
+            int chon;
+            cout<<"Tong so phong muon khoi tao: ";
+            cin>>chon;
+            soPhong = chon;
+            room.resize(chon);
+            for (int i = 0; i < soPhong; i ++){
+                cout<<"Nhap ten phong thu "<<i+1<<": \n";
                 PhongTro a;
                 a.DangKyPhong();
                 room[i] = a;
@@ -137,49 +118,69 @@ class SoQuanLy{
                  cin>>nuocMoi;
                  room[i].SetSoNuocCu(room[i].GetSoNuocMoi());
                  room[i].SetSoNuocMoi(nuocMoi);
-               }
-               
+                 cout<<"Cap nhat thanh cong!";
            }
-           cout<<"Cap nhat thanh cong!";
-         
+           else
+                cout<<"Phong ban nhap khong ton tai!\n";
+           }
        }
          
-        
-        void XuatHoaDonTienDien(){
-            int chon;
-            cout<<"Nhap so thu tu Phong: ";
-            cin>> chon;
-            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
-            else {
-                cout<<"tien dien Phong "<<chon<<" la:"
-                    <<room[chon-1].TinhTienDien()<<"\n";
-            }   
+        void TinhTienDien(){
+            int tenPhong;
+            cout<<"Nhap so phong muon tinh tien Dien: ";
+            cin>>tenPhong;
+            for(int i = 0; i < room.size(); i++){
+               if(room[i].GetSoPhong() == tenPhong ){
+                cout<<"Gia tien Dien phong "<<room[i].GetSoPhong()<<"la: "
+                    <<(room[i].GetSoDienMoi()-room[i].GetSoDienCu())*3500<<"\n";
+               }
+               else cout<<"So phong khong ton tai!\n";
+            }
         }
-         
-    
-        void XuatHoaDonTienNuoc(){
-            int chon;
-            cout<<"Nhap so thu tu Phong: ";
-            cin>> chon;
-            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
-            else {
-                cout<<"tien nuoc Phong "<<chon<<" la:"
-                    <<room[chon-1].TinhTienNuoc()<<"\n";
+        
             
-            }   
+
+        void TinhTienNuoc(){
+            int chonPhong;
+            cout<<"Nhap so phong muon tinh tien Nuoc: ";
+            cin>>chonPhong;
+            for(int i = 0; i < room.size(); i++){
+               if(room[i].GetSoPhong() == chonPhong ){
+                cout<<"Gia tien Nuoc phong "<<room[i].GetSoPhong()<<"la: "
+                    <<(room[i].GetSoNuocMoi()-room[i].GetSoNuocCu())*15000<<"\n";
+               }
+               else cout<<"So phong khong ton tai!\n";
+            }
         }
         
-         void XuatHoaDonTienNha(){
-            int chon;
-            cout<<"Nhap so thu tu Phong: ";
-            cin>> chon;
-            if(chon <=0 || chon > room.size()) cout <<"So Phong k hop le!";
-            else {
-                room[chon-1].TinhTienPhong();
-            }   
-        }
         
-        void TienDienNhieuNhat(){
+        
+        void TinhTienPhong(){
+            time_t now = time(0);
+            tm *ltm = localtime(&now);
+            int chonPhong;
+            cout<<"Nhap so phong muon tinh tien: ";
+            cin>>chonPhong;
+            for(int i = 0; i < room.size(); i++){
+               if(room[i].GetSoPhong() == chonPhong ){
+                    cout<<"Tong tien thue Phong "<<room[i].GetSoPhong()
+                        <<" thang "<<1 + ltm->tm_mon<<" la: "
+                        <<(room[i].GetSoNuocMoi()-room[i].GetSoNuocCu())*15000+
+                        (room[i].GetSoDienMoi()-room[i].GetSoDienCu())*3500
+                        +room[i].GetGiaPhong()<<"\n"
+                        <<"Trong do: \n"
+                        <<"Tien Phong la:"<<room[i].GetGiaPhong()<<"\n"
+                        <<"Tien Dien la: "<<(room[i].GetSoDienMoi()-
+                                            room[i].GetSoDienCu())*3500<<"\n"
+                        <<"Tien Nuoc la: "<<(room[i].GetSoNuocMoi()-
+                                            room[i].GetSoNuocCu())*15000<<"\n";   
+               }
+                else cout<<"So phong khong ton tai!\n";
+            }
+       }        
+        
+        
+       /* void TienDienNhieuNhat(){
             int phong;
             unsigned int Max = room[0].TinhTienDien();
             for (int i = 0; i < room.size(); i ++){
@@ -195,6 +196,8 @@ class SoQuanLy{
             cout<<"Phong thu "<<phong<<" su dung nhieu dien nhat voi "
                 <<Max<<" VND \n";
         }
+        */
+        
         
         
         void GiaoDien(){
@@ -216,12 +219,12 @@ class SoQuanLy{
                 case 1: KhoiTaoSo(); break;
                 case 2: ThemPhong(); break;
                 case 3: CapNhatSoDienNuoc(); break;
-                case 4: XuatHoaDonTienDien(); break;
-                case 5: XuatHoaDonTienNuoc(); break;
-                case 6: XuatHoaDonTienNha(); break;
-                case 7: TienDienNhieuNhat(); break;
+                case 4: TinhTienDien(); break;
+                case 5: TinhTienNuoc(); break;
+                case 6: TinhTienPhong(); break;
+                //case 7: TienDienNhieuNhat(); break;
             }
-            } while(chon != 8);
+            } while(chon != 7);
         }
     
     
